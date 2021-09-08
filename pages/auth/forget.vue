@@ -36,7 +36,7 @@
         </v-form>
       </v-card-text>
       <v-card-actions>
-        <v-btn color="primary" text>
+        <v-btn color="primary" text to="/auth/login">
           กลับหน้าเข้าระบบ
         </v-btn>
         <v-spacer></v-spacer>

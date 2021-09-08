@@ -45,7 +45,7 @@
         </v-form>
       </v-card-text>
       <v-card-actions>
-        <v-btn color="primary">
+        <v-btn color="primary" text>
           ลืมรหัสผ่าน
         </v-btn>
         <v-spacer></v-spacer>

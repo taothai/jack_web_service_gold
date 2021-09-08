@@ -3,7 +3,7 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: 'ระบบจัดการแอพพลิเคชั่่นราคาทอง',
+    titleTemplate: 'ระบบจัดการราคาทอง',
     title: 'goldprice',
     htmlAttrs: {
       lang: 'en'
@@ -38,7 +38,36 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/firebase',
+    'cookie-universal-nuxt'
   ],
+  firebase: {
+    config: {
+        apiKey: "AIzaSyCIC7r9_kvlzz7se1O4zjfmwIMPsArAWBA",
+        authDomain: "goldprice-ceb94.firebaseapp.com",
+        databaseURL: "https://goldprice-ceb94-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "goldprice-ceb94",
+        storageBucket: "goldprice-ceb94.appspot.com",
+        messagingSenderId: "159117195777",
+        appId: "1:159117195777:web:302bddd40b6e17cbae9e00",
+        measurementId: "G-8MDXCX0CZ5"
+      },
+      services: {
+        auth: true,
+        firestore: true,
+        functions: true,
+        storage: true,
+        realtimeDb: true,
+        messaging: true,
+        performance: true,
+        analytics: true,
+        remoteConfig: true
+      },
+      firestore: {
+        enablePersistence: true
+      }
+    },
+    
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -47,6 +76,12 @@ export default {
     theme: {
       dark: false,
       themes: {
+        light: {
+          primary: '#CB4335',
+          secondary: '#b0bec5',
+          accent: '#8c9eff',
+          error: '#b71c1c',
+        },
         dark: {
           primary: colors.blue.darken2,
           accent: colors.grey.darken3,

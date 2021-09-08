@@ -111,24 +111,39 @@ export default {
       fixed: false,
       items: [
         {
-          icon: 'mdi-apps',
+          icon: 'mdi-home',
           title: 'หน้าแรก',
           to: '/'
         },
+         {
+          icon: 'mdi-gold',
+          title: 'เพิ่มราคาทอง',
+          to: '/price/addprice'
+        }, 
         {
-          icon: 'mdi-source-branch',
+          icon: 'mdi-bank-plus',
           title: 'จัดการสาขา',
-          to: '/branch'
+          to: '/branch/ListBranch'
+        }, 
+         {
+          icon: 'mdi-source-branch',
+          title: 'เพิ่มสาขา',
+          to: '/branch/AddBranch'
         }, 
          {
           icon: 'mdi-account-circle',
           title: 'ผู้ใช้งาน',
-          to: '/setting'
+          to: '/user/ListUsers'
+        },
+         {
+          icon: 'mdi-account-plus-outline',
+          title: 'เพิ่มผู้ใช้งาน',
+          to: '/user/AddUser'
         },
          {
           icon: 'mdi-cog',
           title: 'ตั้งค่าระบบ',
-          to: '/setting'
+          to: '/setting/setting'
         },
           {
           icon: 'mdi-logout',
