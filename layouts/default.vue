@@ -7,9 +7,21 @@
       fixed
       app
       dark
-      dense
     >
       <v-list>
+         <v-list-item>
+          <v-list-item-content>
+            <div class="text-center">
+                <img src="~/assets/img/logo.png" width="80"/>
+            </div>
+            
+            <v-list-item-title class="title text-center">
+              <span class="font-weight-bold text-center">ราคาทองวันนี้</span>
+            </v-list-item-title>
+            <v-list-item-subtitle class="text-center">ระบบจัดการแอพพลิเคชันทองคำ</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+          <v-divider></v-divider>
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
@@ -30,13 +42,17 @@
       :clipped-left="clipped"
       fixed
       app
-      flat
       dark
       dense
-      color="primary"
+      color="grey darken-4"
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title v-text="title" class="font-weight-bold"/>
+      <v-toolbar-items>
+        <div class="text-center mt-3">
+                <img src="~/assets/img/logo.png" width="25"/>
+       </div>
+      </v-toolbar-items>
+      <v-toolbar-title v-text="title" class="font-weight-bold ml-2"/>
       <v-spacer />
         <v-badge
           top
@@ -45,12 +61,11 @@
           dot
           color="green"
         >
-        <v-avatar>
-                <img
-                src="https://cdn.vuetifyjs.com/images/john.jpg"
-                alt="John"
-                size="30"
-              >
+       <v-avatar
+              color="red accent-4"
+              size="36"
+            >
+              <span class="white--text text-h5">T</span>
             </v-avatar>
         </v-badge>
        
@@ -113,6 +128,11 @@ export default {
          {
           icon: 'mdi-cog',
           title: 'ตั้งค่าระบบ',
+          to: '/setting'
+        },
+          {
+          icon: 'mdi-logout',
+          title: 'ออกจากระบบ',
           to: '/setting'
         }
       ],
