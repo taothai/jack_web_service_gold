@@ -80,7 +80,7 @@ export default {
           primary: '#CB4335',
           secondary: '#b0bec5',
           accent: '#8c9eff',
-          error: '#b71c1c',
+          error: '#F1948A',
         },
         dark: {
           primary: colors.blue.darken2,

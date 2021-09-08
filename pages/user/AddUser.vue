@@ -47,10 +47,11 @@
                   sm="6"
                 >
                   <v-text-field
-                    v-model="message1"
+                    v-model="Name"
                     label="ชื่อ"
                     outlined
                     clearable
+                    required
                     hide-details
                     dense
                   ></v-text-field>
@@ -61,11 +62,12 @@
                   sm="6"
                 >
                   <v-text-field
-                    v-model="message2"
+                    v-model="Lastname"
                     label="นามสกุล"
                     outlined
                     clearable
                     hide-details
+                    required
                     dense
                   ></v-text-field>
                 </v-col>
@@ -75,12 +77,11 @@
                   sm="6"
                 >
                   <v-text-field
-                    v-model="message3"
+                    v-model="Branch"
                     label="สาขาที่ใช้งาน"
                     outlined
                     clearable
                     hide-details
-                    type="number"
                     dense
                   ></v-text-field>
                 </v-col>
@@ -89,15 +90,14 @@
                   cols="12"
                   sm="6"
                 >
-                  <v-text-field
-                    v-model="message3"
-                    label="อีเมลล์"
-                    outlined
-                    clearable
-                    hide-details
-                    type="number"
-                    dense
-                  ></v-text-field>
+                     <v-text-field
+                      v-model="Email"
+                      outlined
+                      :rules="emailRules"
+                      label="อีเมลล์"
+                      dense
+                      required
+                    ></v-text-field>
                 </v-col>
 
                 <v-col
@@ -105,10 +105,11 @@
                   sm="6"
                 >
                   <v-text-field
-                    v-model="message3"
+                    v-model="CountExprireDate"
                     label="จำนวนวันหมดอายุใช้งาน(วัน)"
                     outlined
                     clearable
+                    required
                     hide-details
                     type="number"
                     dense
@@ -135,13 +136,15 @@
                           sm="6"
                         >
                           <v-text-field
-                            v-model="password"
+                            v-model="Password"
                             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                             :type="show1 ? 'text' : 'password'"
                             name="input-10-1"
                             label="ใส่รหัสผ่าน"
                             hint="At least 8 characters"
                             counter
+                            required
+                            :rules="[v => !!v || 'โปรดระบุ']"
                             @click:append="show1 = !show1"
                           ></v-text-field>
                         </v-col>
@@ -151,13 +154,16 @@
                           sm="6"
                         >
                           <v-text-field
-                            v-model="password"
+                          dark
+                            v-model="ConfirmPassword"
                             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                             :type="show1 ? 'text' : 'password'"
                             name="input-10-1"
                             label="ใส่รหัสผ่านอีกครั้ง"
                             hint="At least 8 characters"
                             counter
+                            required
+                            :rules="[v => !!v || 'โปรดระบุ', v => v === Password || 'รหัสไม่ตรงกัน']"
                             @click:append="show1 = !show1"
                           ></v-text-field>
                         </v-col>
@@ -169,72 +175,23 @@
 
                 </v-col>
 
-                <!--End -->
-                <!--Start new sub coloum -->
-                <v-col
-                  cols="12"
-                  sm="12"
-                >
-                  <v-card outlined>
-                    <div class="text-subtitle-1 pa-5">
-                      # รายละเอียดเพิ่มเติม
-                    </div>
-                    <v-card-text>
-                      <v-row
-                        align="center"
-                        justify-center
-                      >
 
-                        <v-col
-                          cols="12"
-                          sm="12"
-                        >
-                          <v-file-input
-                            label="ไฟล์แนบ"
-                            outlined
-                            dense
-                            append-icon="mdi-camera"
-                            hide-details
-                          ></v-file-input>
-                        </v-col>
-
-                        <v-col
-                          cols="12"
-                          sm="12"
-                        >
-                          <v-textarea
-                            v-model="message3"
-                            label="รายละเอียด"
-                            outlined
-                            height="100"
-                            clearable
-                            hide-details
-                            type="number"
-                            dense
-                          ></v-textarea>
-                        </v-col>
 
                         <v-col
                           cols="12"
                           sm="12"
                         >
                           <v-switch
-                            v-model="switch1"
+                            class="ml-5"
+                            v-model="StatusUser"
                             inset
                             label="เปิดใช้งาน"
                           ></v-switch>
 
                         </v-col>
 
-                      </v-row>
-                    </v-card-text>
-
-                  </v-card>
-
-                </v-col>
-
                 <!--End -->
-
+               
               </v-row>
 
             </v-form>
@@ -260,39 +217,7 @@
   </v-container>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    show1: false,
-    sheet: false,
-    valid: true,
-    name: "",
-    nameRules: [
-      v => !!v || "Name is required",
-      v => (v && v.length <= 10) || "Name must be less than 10 characters"
-    ],
-    email: "",
-    emailRules: [
-      v => !!v || "E-mail is required",
-      v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-    ],
-    select: null,
-    items: ["Item 1", "Item 2", "Item 3", "Item 4"],
-    checkbox: false
-  }),
-
-  methods: {
-    validate() {
-      this.$refs.form.validate();
-    },
-    reset() {
-      this.$refs.form.reset();
-    },
-    resetValidation() {
-      this.$refs.form.resetValidation();
-    }
-  }
-};
+<script  src="./myadduser.js">
 </script>
 <style lang="scss" scoped>
 </style>

@@ -24,13 +24,13 @@
           v-model="valid"
           lazy-validation
         >
-          <v-text-field
+            <v-text-field
             v-model="email"
             outlined
             :rules="emailRules"
             label="อีเมลล์"
-            required
             dense
+            required
           ></v-text-field>
 
         </v-form>
@@ -43,6 +43,7 @@
         <v-btn
           color="error"
           width="180"
+          @click="validate()"
         >
           ขอรหัสผ่านใหม่
         </v-btn>
@@ -52,6 +53,23 @@
 </template>
 <script>
 export default {
-  layout: "login"
+  layout: "login", 
+  data() {
+    return {
+      email : '',
+      valid : true,
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+\..+/.test(v) || 'รูปแบบไม่ถูกต้อง',
+      ],
+    }
+  },
+  methods: {
+      validate() {
+       var vd =  this.$refs.form.validate()
+       console.log(vd);
+      },
+  },
+
 };
 </script>
