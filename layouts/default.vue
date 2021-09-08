@@ -1,0 +1,126 @@
+<template>
+  <v-app >
+    <v-navigation-drawer
+      v-model="drawer"
+      :mini-variant="miniVariant"
+      :clipped="clipped"
+      fixed
+      app
+      dark
+      dense
+    >
+      <v-list>
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+          :to="item.to"
+          router
+          exact
+        >
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.title" />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+    <v-app-bar
+      :clipped-left="clipped"
+      fixed
+      app
+      flat
+      dark
+      dense
+      color="primary"
+    >
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-toolbar-title v-text="title" class="font-weight-bold"/>
+      <v-spacer />
+        <v-badge
+          top
+          overlap
+          left
+          dot
+          color="green"
+        >
+        <v-avatar>
+                <img
+                src="https://cdn.vuetifyjs.com/images/john.jpg"
+                alt="John"
+                size="30"
+              >
+            </v-avatar>
+        </v-badge>
+       
+    
+    </v-app-bar>
+    <v-main>
+      <v-container>
+        <Nuxt />
+      </v-container>
+    </v-main>
+    <v-navigation-drawer
+      v-model="rightDrawer"
+      :right="right"
+      temporary
+      fixed
+    >
+      <v-list>
+        <v-list-item @click.native="right = !right">
+          <v-list-item-action>
+            <v-icon light>
+              mdi-repeat
+            </v-icon>
+          </v-list-item-action>
+          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+    <v-footer
+      :absolute="!fixed"
+      app
+    >
+      <span>&copy; {{ new Date().getFullYear() }}</span>
+    </v-footer>
+  </v-app>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      clipped: false,
+      drawer: false,
+      fixed: false,
+      items: [
+        {
+          icon: 'mdi-apps',
+          title: 'หน้าแรก',
+          to: '/'
+        },
+        {
+          icon: 'mdi-source-branch',
+          title: 'จัดการสาขา',
+          to: '/branch'
+        }, 
+         {
+          icon: 'mdi-account-circle',
+          title: 'ผู้ใช้งาน',
+          to: '/setting'
+        },
+         {
+          icon: 'mdi-cog',
+          title: 'ตั้งค่าระบบ',
+          to: '/setting'
+        }
+      ],
+      miniVariant: false,
+      right: true,
+      rightDrawer: false,
+      title: 'ระบบจัดการราคาทอง'
+    }
+  }
+}
+</script>
