@@ -733,6 +733,7 @@
 
 <script>
 export default {
+  middleware: 'authenticated',
   data: () => ({
     sheet: false,
     valid: true,

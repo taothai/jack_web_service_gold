@@ -8,15 +8,18 @@
     </div>
     <v-card
       elevation="10"
-      max-width="400"   
+      max-width="400"
       min-width="400"
     >
-     <v-card-title primary-title class="text-center">
-         <v-spacer></v-spacer>
-         <div class="text-center">กรุณากรอกอีเมลล์</div>
-         <v-spacer></v-spacer>
-         
-     </v-card-title>
+      <v-card-title
+        primary-title
+        class="text-center"
+      >
+        <v-spacer></v-spacer>
+        <div class="text-center">กรุณากรอกอีเมลล์</div>
+        <v-spacer></v-spacer>
+
+      </v-card-title>
       <v-card-text>
 
         <v-form
@@ -24,8 +27,8 @@
           v-model="valid"
           lazy-validation
         >
-            <v-text-field
-            v-model="email"
+          <v-text-field
+            v-model="Email"
             outlined
             :rules="emailRules"
             label="อีเมลล์"
@@ -34,9 +37,35 @@
           ></v-text-field>
 
         </v-form>
+
+        <!-- ALERT START -->
+        <v-snackbar
+          v-model="snackbar"
+          :vertical="vertical"
+          :color="color"
+        >
+          {{ alerttext }}
+
+          <template v-slot:action="{ attrs }">
+            <v-btn
+              color="white"
+              text
+              v-bind="attrs"
+              @click="snackbar = false"
+            >
+              ปิด
+            </v-btn>
+          </template>
+        </v-snackbar>
+        <!-- ALERT END -->
+
       </v-card-text>
       <v-card-actions>
-        <v-btn color="primary" text to="/auth/login">
+        <v-btn
+          color="primary"
+          text
+          to="/auth/login"
+        >
           กลับหน้าเข้าระบบ
         </v-btn>
         <v-spacer></v-spacer>
@@ -51,25 +80,5 @@
     </v-card>
   </div>
 </template>
-<script>
-export default {
-  layout: "login", 
-  data() {
-    return {
-      email : '',
-      valid : true,
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'รูปแบบไม่ถูกต้อง',
-      ],
-    }
-  },
-  methods: {
-      validate() {
-       var vd =  this.$refs.form.validate()
-       console.log(vd);
-      },
-  },
-
-};
+<script src="./MyForget.js">
 </script>

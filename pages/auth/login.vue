@@ -25,7 +25,7 @@
           lazy-validation
         >
           <v-text-field
-            v-model="email"
+            v-model="Email"
             outlined
             :rules="emailRules"
             label="อีเมลล์"
@@ -33,7 +33,7 @@
             required
           ></v-text-field>
           <v-text-field
-            v-model="password"
+            v-model="Password"
             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
             :rules="[rules.required, rules.min]"
             :type="show1 ? 'text' : 'password'"
@@ -48,6 +48,29 @@
           ></v-text-field>
 
         </v-form>
+
+        <!-- ALERT START --> 
+             <v-snackbar
+                v-model="snackbar"
+                :vertical="vertical"
+                :color="color"
+              >
+                {{ alerttext }}
+
+                <template v-slot:action="{ attrs }">
+                  <v-btn
+                    color="white"
+                    text
+                    v-bind="attrs"
+                    @click="snackbar = false"
+                  >
+                    ปิด
+                  </v-btn>
+                </template>
+              </v-snackbar>
+         <!-- ALERT END --> 
+
+
       </v-card-text>
       <v-card-actions>
         <v-btn color="primary" text to="/auth/forget">
@@ -65,38 +88,4 @@
     </v-card>
   </div>
 </template>
-<script>
-import nuxtStorage from 'nuxt-storage';
-export default {
-  layout: "login", 
-   head(){
-      return {
-        title : 'เข้าสู่ระบบจัดการจัดการ',
-        description : 'เข้าจัดการระบบ Admin'
-      }
-    },
-  data() {
-    return {
-      valid : true,
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'รูปแบบไม่ถูกต้อง',
-      ],
-      rules: {
-          required: value => !!value || 'Required.',
-          min: v => v.length >= 8 || 'Min 8 characters',
-          emailMatch: () => (`The email and password you entered don't match`),
-        },
-      show1: false,
-      email : '',
-      password : ''
-    }
-  },
-  methods: {
-    validate() {
-       var vd =  this.$refs.form.validate()
-       console.log(vd);
-      },
-  },
-};
-</script>
+<script src="./MyLogin.js"/>

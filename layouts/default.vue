@@ -1,5 +1,5 @@
 <template>
-  <v-app >
+  <v-app>
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -9,19 +9,22 @@
       dark
     >
       <v-list>
-         <v-list-item>
+        <v-list-item>
           <v-list-item-content>
             <div class="text-center">
-                <img src="~/assets/img/logo.png" width="80"/>
+              <img
+                src="~/assets/img/logo.png"
+                width="80"
+              />
             </div>
-            
+
             <v-list-item-title class="title text-center">
               <span class="font-weight-bold text-center">ราคาทองวันนี้</span>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">ระบบจัดการแอพพลิเคชันทองคำ</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-          <v-divider></v-divider>
+        <v-divider></v-divider>
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
@@ -49,27 +52,94 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-items>
         <div class="text-center mt-3">
-                <img src="~/assets/img/logo.png" width="25"/>
-       </div>
+          <img
+            src="~/assets/img/logo.png"
+            width="25"
+          />
+        </div>
       </v-toolbar-items>
-      <v-toolbar-title v-text="title" class="font-weight-bold ml-2"/>
+      <v-toolbar-title
+        v-text="title"
+        class="font-weight-bold text-subtitle-1 ml-2"
+      />
       <v-spacer />
-        <v-badge
-          top
-          overlap
-          left
-          dot
-          color="green"
+
+      <!-- USER ZONE -->
+
+      <div class="text-center">
+        <v-menu
+          v-model="menu"
+          :close-on-content-click="false"
+          :nudge-width="200"
+          offset-x
         >
-       <v-avatar
-              color="red accent-4"
-              size="36"
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              text
+              v-bind="attrs"
+              v-on="on"
             >
-              <span class="white--text text-h5">T</span>
-            </v-avatar>
-        </v-badge>
-       
-    
+              <v-toolbar-title
+                v-text="`Hi `+ Name"
+                class="font-weight-regular text-subtitle-1 mr-2"
+              />
+              <v-badge
+                top
+                overlap
+                left
+                dot
+                color="green"
+              >
+                <v-avatar
+                  color="red accent-4"
+                  size="36"
+                >
+                  <span class="white--text text-h5">T</span>
+                </v-avatar>
+              </v-badge>
+            </v-btn>
+          </template>
+
+          <v-card>
+            <v-list>
+              <v-list-item>
+                <v-avatar
+                  color="red accent-4"
+                  size="36"
+                  class="mr-5"
+                >
+                  <span class="white--text text-h5">T</span>
+                </v-avatar>
+
+                <v-list-item-content>
+                  <v-list-item-title>{{Name }} {{LastName}}</v-list-item-title>
+                  <v-list-item-subtitle>{{Email}}</v-list-item-subtitle>
+                </v-list-item-content>
+
+                <v-list-item-action>
+
+                </v-list-item-action>
+              </v-list-item>
+            </v-list>
+
+            <v-divider></v-divider>
+            <v-list>
+              <v-list-item @click="Logout()">
+                <v-list-item-action>
+                  <v-icon>mdi-logout</v-icon>
+                </v-list-item-action>
+                <v-list-item-title>ออกจากระบบ</v-list-item-title>
+              </v-list-item>
+
+            </v-list>
+
+            <v-card-actions>
+            </v-card-actions>
+          </v-card>
+        </v-menu>
+      </div>
+
+      <!--  END USER ZONE -->
     </v-app-bar>
     <v-main>
       <v-container>
@@ -94,68 +164,13 @@
       </v-list>
     </v-navigation-drawer>
     <v-footer
-      :absolute="!fixed"
+      fixed
       app
     >
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+      <span>&copy;ราคาทองวันนี้ Develop by TEEKHA {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
 </template>
 
-<script>
-export default {
-  data () {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'mdi-home',
-          title: 'หน้าแรก',
-          to: '/'
-        },
-         {
-          icon: 'mdi-gold',
-          title: 'เพิ่มราคาทอง',
-          to: '/price/addprice'
-        }, 
-        {
-          icon: 'mdi-bank-plus',
-          title: 'จัดการสาขา',
-          to: '/branch/ListBranch'
-        }, 
-         {
-          icon: 'mdi-source-branch',
-          title: 'เพิ่มสาขา',
-          to: '/branch/AddBranch'
-        }, 
-         {
-          icon: 'mdi-account-circle',
-          title: 'ผู้ใช้งาน',
-          to: '/user/ListUsers'
-        },
-         {
-          icon: 'mdi-account-plus-outline',
-          title: 'เพิ่มผู้ใช้งาน',
-          to: '/user/AddUser'
-        },
-         {
-          icon: 'mdi-cog',
-          title: 'ตั้งค่าระบบ',
-          to: '/setting/setting'
-        },
-          {
-          icon: 'mdi-logout',
-          title: 'ออกจากระบบ',
-          to: '/setting'
-        }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'ระบบจัดการราคาทอง'
-    }
-  }
-}
+<script src="./MyPrivate.js">
 </script>

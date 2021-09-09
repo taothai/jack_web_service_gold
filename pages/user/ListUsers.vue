@@ -106,6 +106,24 @@
                               type="number"
                             ></v-text-field>
                           </v-col>
+
+                           <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                             <v-select
+                              :items="statusselect"
+                              v-model="editedItem.StatusUser"
+                              item-text="name"
+                              label="สถานะการใช้งาน"
+                            ></v-select>
+                          </v-col>
+
+
+
+
+                          
                         </v-row>
                       </v-container>
                     </v-card-text>
@@ -184,7 +202,14 @@
                   <template v-slot:item.listnumber="{ item }">
                     <div>{{item.index}}</div>
                   </template>
+                    <template v-slot:item.StatusUser="{ item }">
 
+                      <v-badge
+                        :color="getColor(item.StatusUser)"
+                        inline
+                        dot
+                      ></v-badge>
+                      </template>
                   <template v-slot:item.actions="{ item }">
                     <v-icon
                       small
