@@ -11,170 +11,220 @@
         md="12"
         lg="12"
       >
-
         <v-card
           class="ml-2"
           elevation="6"
           max-width="1000"
         >
           <v-card-title>
-              <div class="text-subtitle-1">
+            <div class="text-subtitle-1">
               # รายชื่อผู้ใช้งาน
             </div>
 
             <v-spacer></v-spacer>
 
-             <v-btn
-                color="primary"
-                elevation="0"
-                outlined
-                small
-                to="/user/adduser"
-              >เพิ่มผู้ใช้งาน</v-btn>
-            
+            <v-btn
+              color="primary"
+              elevation="0"
+              outlined
+              small
+              to="/user/adduser"
+            >เพิ่มผู้ใช้งาน</v-btn>
+
           </v-card-title>
           <v-divider></v-divider>
           <v-card-text>
 
-            <v-form
-              ref="form"
-              v-model="valid"
-              lazy-validation
-            >
-              <v-row>
-                <!-- Start -->
-                <v-col
-                  cols="12"
-                  sm="12"
+            <v-row>
+              <v-col
+                cols="12"
+                sm="12"
+              >
+                <!-- START DIALOG -->
+                <v-dialog
+                  v-model="dialog"
+                  max-width="500px"
                 >
-                  <!-- รูปภาพสินค้า -->
-                  <v-card outlined>
+                  <v-card>
+                    <v-card-title>
+                      <span class="text-h5">{{ formTitle }}</span>
+                    </v-card-title>
+
                     <v-card-text>
-                      <v-row
-                        align="center"
-                        justify-center
-                      >
-
-                        <v-col
-                          cols="12"
-                          sm="12"
-                        >
-                          <v-text-field
-                            v-model="message2"
-                            label="ค้นหา"
-                            outlined
-                            single-line
-                            clearable
-                            hide-details
-                            append-icon="mdi-magnify"
-                            dense
-                          ></v-text-field>
-                        </v-col>
-
-                        <v-col
-                          cols="12"
-                          sm="12"
-                        >
-                          <v-data-table
-                            dense
-                            :headers="headers"
-                            :items="desserts"
-                            item-key="name"
-                            class="elevation-1"
-                          ></v-data-table>
-                        </v-col>
-
-                        <!-- End -->
-
-
-                      </v-row>
+                      <v-container>
+                        <v-row>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              v-model="editedItem.Name"
+                              label="ชื่อ"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              v-model="editedItem.Lastname"
+                              label="นามสกุล"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              disabled
+                              v-model="editedItem.Email"
+                              label="อีเมลล์"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              disabled
+                              v-model="editedItem.Branch"
+                              label="สาขา"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              v-model="editedItem.CountExprireDate"
+                              label="วันใช้งาน"
+                              type="number"
+                            ></v-text-field>
+                          </v-col>
+                        </v-row>
+                      </v-container>
                     </v-card-text>
 
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        @click="close"
+                      >
+                        Cancel
+                      </v-btn>
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        @click="save"
+                      >
+                        Save
+                      </v-btn>
+                    </v-card-actions>
                   </v-card>
+                </v-dialog>
+                <v-dialog
+                  v-model="dialogDelete"
+                  max-width="500px"
+                >
+                  <v-card>
+                    <v-card-title class="text-h5">ยืนยันการ?</v-card-title>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        @click="closeDelete"
+                      >Cancel</v-btn>
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        @click="deleteItemConfirm"
+                      >OK</v-btn>
+                      <v-spacer></v-spacer>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+                <!-- END DIALOG -->
 
-                </v-col>
+                <!-- DIALOG SACKBAR-->
+                <v-snackbar
+                  v-model="snackbar"
+                  :vertical="vertical"
+                  :color="color"
+                >
+                  {{ alerttext }}
 
-                
+                  <template v-slot:action="{ attrs }">
+                    <v-btn
+                      color="white"
+                      text
+                      v-bind="attrs"
+                      @click="snackbar = false"
+                    >
+                      ปิด
+                    </v-btn>
+                  </template>
+                </v-snackbar>
 
+                <!-- END DIALOG SACKBAR-->
+                <v-data-table
+                  :headers="headers"
+                  :items="desserts"
+                  sort-by="calories"
+                  class="elevation-1"
+                >
 
+                  <template v-slot:item.listnumber="{ item }">
+                    <div>{{item.index}}</div>
+                  </template>
 
-              </v-row>
+                  <template v-slot:item.actions="{ item }">
+                    <v-icon
+                      small
+                      class="mr-2"
+                      @click="editItem(item)"
+                    >
+                      mdi-pencil
+                    </v-icon>
+                    <v-icon
+                      small
+                      @click="deleteItem(item)"
+                    >
+                      mdi-delete
+                    </v-icon>
+                  </template>
 
-            </v-form>
+                  <template v-slot:no-data>
+                    <v-btn
+                      color="primary"
+                      @click="initialize"
+                    >
+                      Reset
+                    </v-btn>
+                  </template>
+                </v-data-table>
+
+              </v-col>
+
+            </v-row>
+
           </v-card-text>
         </v-card>
 
       </v-col>
     </v-row>
 
-  
   </v-container>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    sheet: false,
-    valid: true,
-    name: "",
-    nameRules: [
-      v => !!v || "Name is required",
-      v => (v && v.length <= 10) || "Name must be less than 10 characters"
-    ],
-    email: "",
-    emailRules: [
-      v => !!v || "E-mail is required",
-      v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-    ],
-    select: null,
-    items: ["Item 1", "Item 2", "Item 3", "Item 4"],
-    checkbox: false,
-
-    //table
-    desserts: [
-      {
-        name: "รักชาย นายรักกัน",
-        calories: 159,
-        fat: 6.0,
-        carbs: 24,
-        protein: 4.0,
-        iron: "1%"
-      },
-      {
-        name: "Ice cream sandwich",
-        calories: 237,
-        fat: 9.0,
-        carbs: 37,
-        protein: 4.3,
-        iron: "1%"
-      }
-    ],
-    headers: [
-      { text: "#", value: "fat" ,align: 'center',},
-      {
-        text: "ชื่อผู้ใช้งาน",
-        align: "start",
-        sortable: false,
-        value: "name"
-      },
-      { text: "อีเมลล์", value: "calories" },
-      { text: "จำนวนวันใช้งาน", value: "calories" , align: 'center',},
-      { text: "จัดการผู้ใช้งาน", value: "carbs" ,align: 'center',}
-    ]
-  }),
-
-  methods: {
-    validate() {
-      this.$refs.form.validate();
-    },
-    reset() {
-      this.$refs.form.reset();
-    },
-    resetValidation() {
-      this.$refs.form.resetValidation();
-    }
-  }
-};
-</script>
+<script src="./MyListUser.js">
+</script >
 <style lang="scss" scoped>
 </style>

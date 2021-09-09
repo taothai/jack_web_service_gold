@@ -76,14 +76,18 @@
                   cols="12"
                   sm="6"
                 >
-                  <v-text-field
-                    v-model="Branch"
-                    label="สาขาที่ใช้งาน"
-                    outlined
-                    clearable
-                    hide-details
-                    dense
-                  ></v-text-field>
+                   <v-select
+                            :items="ListBranch"
+                            outlined
+                            clearable
+                            required
+                            dense
+                            label="ประจำสาขา"
+                            v-model="Branch"
+                            :rules="[v => !!v || 'ยังไม่ได้เลือก']"
+                            @change="BarnchSelect"
+                            color="primary"
+                          ></v-select>
                 </v-col>
 
                 <v-col
@@ -114,6 +118,24 @@
                     type="number"
                     dense
                   ></v-text-field>
+                </v-col>
+
+                  <v-col
+                  cols="12"
+                  sm="6"
+                >
+                   <v-select
+                            :items="ListTypeUser"
+                            outlined
+                            clearable
+                            required
+                            dense
+                            label="ระดับผู้ใช้งาน"
+                            v-model="TypeUserSelct"
+                            :rules="[v => !!v || 'ยังไม่ได้เลือก']"
+                            append-icon="mdi-account"
+                            color="primary"
+                          ></v-select>
                 </v-col>
 
                 <!--Start new sub coloum -->
@@ -190,21 +212,54 @@
 
                         </v-col>
 
+                        <v-col
+                          cols="12"
+                          sm="12"
+                          class="text-center pa-5"
+                          v-if="Loading"
+    
+                        >
+                        <div class="pa-5">กำลังบันทึกข้อมูล</div>
+                        <v-progress-circular
+                          indeterminate
+                          color="red"
+                           ></v-progress-circular>
+
+                        </v-col>
+
                 <!--End -->
                
               </v-row>
 
             </v-form>
+
+              <v-snackbar
+                v-model="snackbar"
+                :vertical="vertical"
+                :color="color"
+              >
+                {{ alerttext }}
+
+                <template v-slot:action="{ attrs }">
+                  <v-btn
+                    color="white"
+                    text
+                    v-bind="attrs"
+                    @click="snackbar = false"
+                  >
+                    ปิด
+                  </v-btn>
+                </template>
+              </v-snackbar>
           </v-card-text>
 
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
               width="150"
-              :disabled="!valid"
               color="success"
               class="mr-4"
-              @click="validate"
+              @click="AddUser()"
             >
               บันทึกข้อมูล
             </v-btn>
