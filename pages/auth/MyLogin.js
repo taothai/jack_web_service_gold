@@ -23,7 +23,7 @@ export default {
       },
       show1: false,
       Email: "jackapigold@gmail.com",
-      Password: "1234567890",
+      Password: "z,=v[86i,kd8iy[",
 
       //alert zone
       alerttext: "",
@@ -37,16 +37,16 @@ export default {
       var vd = this.$refs.form.validate();
       if (vd) {
           this.Login()
-          console.log('login');
+          //console.log('login');
       }else{
         this.ErrorWork('กรอกข้อมูลไม่ถูกต้อง')
-        console.log('not login');
+        //console.log('not login');
       }
 
     },
     async Login() {
         try {
-          //console.log('login');
+          ////console.log('login');
           await this.$fire.auth.signInWithEmailAndPassword(
             this.Email,
             this.Password
@@ -65,7 +65,7 @@ export default {
               }
         }, 
 async LoadProfile(user){
-        console.log('Load profile');
+        //console.log('Load profile');
         try {
             await this.$fire.firestore
             .collection("USER")
@@ -89,17 +89,40 @@ async LoadProfile(user){
         }
     },
     SaveStatus(db){
-      console.log(db);
-      console.log('Save Status');
+      //console.log(db);
+      //console.log('Save Status');
       this.$cookies.set('goldlogin', true, {
         path: '/',
         maxAge: 60 * 60 * 24 * 30
             })
-       nuxtStorage.localStorage.setData('ismail',this.Email,'15','d');
-       nuxtStorage.localStorage.setData('isname',db[0].Name,'15','d');
-       nuxtStorage.localStorage.setData('islastname',db[0].Lastname,'15','d');
-       nuxtStorage.localStorage.setData('isuser',db[0].TypeUserSelct,'15','d');
-       this.GotoHomePage()
+       nuxtStorage.localStorage.setData('ismail',this.Email,'30','d');
+       nuxtStorage.localStorage.setData('isname',db[0].Name,'30','d');
+       nuxtStorage.localStorage.setData('islastname',db[0].Lastname,'30','d');
+       nuxtStorage.localStorage.setData('isuser',db[0].TypeUserSelct,'30','d');
+       this.LoadSetting()
+    },
+  async LoadSetting(){
+      try {
+        await this.$fire.firestore
+        .collection("SETTING")
+        .get()
+        .then(snap => {
+            var dd = snap.docs.map(function(doc) {
+            var db = doc.data();
+            db.id = doc.id;
+            return db;
+            });
+            var db = dd[0]
+            console.log(db);
+            nuxtStorage.localStorage.setData('frequencyload',db.frequencyload,'30','d');
+            nuxtStorage.localStorage.setData('maintemplate',db.maintemplate,'30','d');
+            this.SucceceWork('โหลดข้อมูลการตั้งค่าสำเร็จ')
+            this.GotoHomePage()
+            
+        });
+    } catch (error) {
+        this.ErrorWork('โหลดข้อมูลการตั้งค่าไม่ได้ โปรดลองอีกครั้ง : ' + error)
+    }
     },
     GotoHomePage(){
         setTimeout(() => {

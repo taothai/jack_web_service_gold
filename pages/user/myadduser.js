@@ -11,7 +11,7 @@ export default {
     Loading : false,
     ListBranch: ["สาขาที่ 1", "สาขาที่ 2"],
     ListTypeUser: ["admin", "user"],
-    TypeUserSelct: "user",
+    TypeUserSelct: "admin",
     show1: false,
     sheet: false,
     valid: true,

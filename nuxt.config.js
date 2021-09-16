@@ -2,6 +2,8 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  target: 'static',
+  ssr: false,
   head: {
     titleTemplate: 'ระบบจัดการราคาทอง',
     title: 'goldprice',
@@ -65,6 +67,8 @@ export default {
       },
       firestore: {
         enablePersistence: true
+      },
+      database: {
       }
     },
     
@@ -81,6 +85,8 @@ export default {
           secondary: '#b0bec5',
           accent: '#8c9eff',
           error: '#F1948A',
+          working :'#EC7063',
+          background: colors.indigo.lighten5,
         },
         dark: {
           primary: colors.blue.darken2,

@@ -1,9 +1,10 @@
 
 ]<template>
-  <v-container class="ml-2">
+  <v-container class="ml-2 pa-0 mt-5 mb-5" fluid>
     <v-row
       align="center"
       justify-center
+      class="pa-0 mr-2"
     >
       <v-col
         col="12"
@@ -11,729 +12,206 @@
         sm="12"
         md="12"
         lg="12"
+        class="pa-0"
+        max-width="800"
       >
 
-        <v-card
-          class="ml-2 pa-5"
-          elevation="10"
-          max-width="1000"
-        >
-          <v-card-title class="text-h5 ">
-            รายงานทั้งหมด
-          </v-card-title>
+        <v-row>
 
-          <v-divider></v-divider>
-          <v-card-text>
-
-            <v-form
-              ref="form"
-              v-model="valid"
-              lazy-validation
+          <!--START COL -->
+          <v-col
+            cols="12"
+            sm="6"
+          >
+            <v-card
+              color="primary"
+              dark
+              max-width="700"
             >
-              <!-- col="12" lg="12" xl="12" md="12" sm="12" xs="12" -->
+              <div class="d-flex flex-no-wrap justify-space-between">
+                <div>
+                  <v-card-title class="text-h6">
+                    จัดการราคาทอง
+                  </v-card-title>
 
-              <!--start-->
-              <v-row>
-                <v-col
-                  cols="12"
-                  xl="3"
-                  lg="4"
-                  md="6"
-                  sm="6"
-                  xs="12"
+                  <v-card-subtitle>
+                    เพิ่มหรือจัดการราคาทอง
+                  </v-card-subtitle>
+                  <v-card-actions>
+                    <v-btn
+                      class="ml-2 mt-5"
+                      outlined
+                      rounded
+                      small
+                      to="price/ListPrice"
+                    >
+                      จัดการ
+                    </v-btn>
+                  </v-card-actions>
+                </div>
+
+                <v-avatar
+                  class="ma-3"
+                  size="125"
+                  tile
                 >
-                  <v-card
-                    class="pa-0"
-                    elevation="0"
-                    color="#52BE80"
-                    dark
-                  >
-                    <v-card-text>
-                      <div class="text-h4 white--text">50</div>
-                      <div class="white--text text-headline font-weight-bold">จำนวนการขาย(Sale)</div>
-                    </v-card-text>
-                  </v-card>
+                  <v-img src="https://www.prachachat.net/wp-content/uploads/2021/03/GoldA1200x800-728x485.jpg"></v-img>
+                </v-avatar>
+              </div>
+            </v-card>
+          </v-col>
 
-                </v-col>
+          <!--END COL -->
 
-                <!--start-->
-                <v-col
-                  cols="12"
-                  xl="3"
-                  lg="4"
-                  md="6"
-                  sm="6"
-                  xs="12"
-                >
-                  <v-card
-                    class="pa-0"
-                    elevation="0"
-                    color="#52BE80"
-                    dark
-                  >
-                    <v-card-text>
-                      <div class="text-h4 white--text">50</div>
-                      <div class="white--text text-headline font-weight-bold">จำนวนการซื้อ(Purchases)</div>
-                    </v-card-text>
-                  </v-card>
 
-                </v-col>
-                <!--start-->
-                <v-col
-                  cols="12"
-                  xl="3"
-                  lg="4"
-                  md="6"
-                  sm="6"
-                  xs="12"
-                >
-                  <v-card
-                    class="pa-0"
-                    elevation="0"
-                    color="#52BE80"
-                    dark
-                  >
-                    <v-card-text>
-                      <div class="text-h4 white--text">50</div>
-                      <div class="white--text text-headline font-weight-bold">จำนวนรายรับ(Income)</div>
-                    </v-card-text>
-                  </v-card>
 
-                </v-col>
-
-                <!--start-->
-                <v-col
-                  cols="12"
-                  xl="3"
-                  lg="4"
-                  md="6"
-                  sm="6"
-                  xs="12"
-                >
-                  <v-card
-                    class="pa-0"
-                    elevation="0"
-                    color="#52BE80"
-                    dark
-                  >
-                    <v-card-text>
-                      <div class="text-h4 white--text">50</div>
-                      <div class="white--text text-headline font-weight-bold">จำนวนรายจ่าย(Expenses)</div>
-                    </v-card-text>
-                  </v-card>
-
-                </v-col>
-
-                <!--start-->
-                <v-col
-                  cols="12"
-                  xl="3"
-                  lg="4"
-                  md="6"
-                  sm="6"
-                  xs="12"
-                >
-                  <v-card
-                    class="pa-0"
-                    elevation="0"
-                    color="#52BE80"
-                    dark
-                  >
-                    <v-card-text>
-                      <div class="text-h4 white--text">50</div>
-                      <div class="white--text text-headline font-weight-bold">จำนวนใบเสนอราคา(Quotations)</div>
-                    </v-card-text>
-                  </v-card>
-
-                </v-col>
-
-                <!--start-->
-                <v-col
-                  cols="12"
-                  xl="3"
-                  lg="4"
-                  md="6"
-                  sm="6"
-                  xs="12"
-                >
-                  <v-card
-                    class="pa-0"
-                    elevation="5"
-                    color="#52BE80"
-                    dark
-                  >
-                    <v-card-text>
-                      <div class="text-h4 white--text">50</div>
-                      <div class="white--text text-headline font-weight-bold">จำนวนการคืนสินค้า(Return Orders)</div>
-                    </v-card-text>
-                  </v-card>
-
-                </v-col>
-
-                <!--start-->
-                <v-col
-                  cols="12"
-                  xl="3"
-                  lg="4"
-                  md="6"
-                  sm="6"
-                  xs="12"
-                >
-                  <v-card
-                    class="pa-0"
-                    elevation="0"
-                    color="#52BE80"
-                    dark
-                  >
-                    <v-card-text>
-                      <div class="text-h4 white--text">50</div>
-                      <div class="white--text text-headline font-weight-bold">จำนวนการปรับสต็อค(Stock Ajustment)</div>
-                    </v-card-text>
-                  </v-card>
-
-                </v-col>
-
-                <!--start-->
-                <v-col
-                  cols="12"
-                  xl="3"
-                  lg="4"
-                  md="6"
-                  sm="6"
-                  xs="12"
-                >
-                  <v-card
-                    class="pa-0"
-                    elevation="0"
-                    color="#52BE80"
-                    dark
-                  >
-                    <v-card-text>
-                      <div class="text-h4 white--text">50</div>
-                      <div class="white--text text-headline font-weight-bold">จำนวนการโอนย้ายสต็อค(Stock Tranfer)</div>
-                    </v-card-text>
-                  </v-card>
-
-                </v-col>
-
-                <!--start-->
-                <v-col
-                  cols="12"
-                  xl="3"
-                  lg="4"
-                  md="6"
-                  sm="6"
-                  xs="12"
-                >
-                  <v-card
-                    class="pa-0"
-                    elevation="0"
-                    color="#52BE80"
-                    dark
-                  >
-                    <v-card-text>
-                      <div class="text-h4 white--text">50</div>
-                      <div class="white--text text-headline font-weight-bold">จำนวนลูกค้า(Customer)</div>
-                    </v-card-text>
-                  </v-card>
-
-                </v-col>
-
-                <!--start-->
-                <v-col
-                  cols="12"
-                  xl="3"
-                  lg="4"
-                  md="6"
-                  sm="6"
-                  xs="12"
-                >
-                  <v-card
-                    class="pa-0"
-                    elevation="0"
-                    color="#52BE80"
-                    dark
-                  >
-                    <v-card-text>
-                      <div class="text-h4 white--text">50</div>
-                      <div class="white--text text-headline font-weight-bold">จำนวนซัพพลายเออร์(Suppliers)</div>
-                    </v-card-text>
-                  </v-card>
-
-                </v-col>
-
-                <!--start-->
-                <v-col
-                  cols="12"
-                  xl="3"
-                  lg="4"
-                  md="6"
-                  sm="6"
-                  xs="12"
-                >
-                  <v-card
-                    class="pa-0"
-                    elevation="0"
-                    color="#52BE80"
-                    dark
-                  >
-                    <v-card-text>
-                      <div class="text-h4 white--text">50</div>
-                      <div class="white--text text-headline font-weight-bold">จำนวนหมวดหมู่(Categories)</div>
-                    </v-card-text>
-                  </v-card>
-
-                </v-col>
-
-                <!--start-->
-                <v-col
-                  cols="12"
-                  xl="3"
-                  lg="4"
-                  md="6"
-                  sm="6"
-                  xs="12"
-                >
-                  <v-card
-                    class="pa-0"
-                    elevation="0"
-                    color="#52BE80"
-                    dark
-                  >
-                    <v-card-text>
-                      <div class="text-h4 white--text">50</div>
-                      <div class="white--text text-headline font-weight-bold">จำนวนแบรนด์สินค้า(Brand)</div>
-                    </v-card-text>
-                  </v-card>
-
-                </v-col>
-
-                <!--start-->
-                <v-col
-                  cols="12"
-                  xl="3"
-                  lg="4"
-                  md="6"
-                  sm="6"
-                  xs="12"
-                >
-                  <v-card
-                    class="pa-0"
-                    elevation="0"
-                    color="#52BE80"
-                    dark
-                  >
-                    <v-card-text>
-                      <div class="text-h4 white--text">50</div>
-                      <div class="white--text text-headline font-weight-bold">จำนวนสินค้า(Products)</div>
-                    </v-card-text>
-                  </v-card>
-
-                </v-col>
-
-                <!--start-->
-                <v-col
-                  cols="12"
-                  xl="3"
-                  lg="4"
-                  md="6"
-                  sm="6"
-                  xs="12"
-                >
-                  <v-card
-                    class="pa-0"
-                    elevation="0"
-                    color="#52BE80"
-                    dark
-                  >
-                    <v-card-text>
-                      <div class="text-h4 white--text">50</div>
-                      <div class="white--text text-headline font-weight-bold">จำนวนการให้บริการ(Service)</div>
-                    </v-card-text>
-                  </v-card>
-
-                </v-col>
-
-                <!--start-->
-                <v-col
-                  cols="12"
-                  xl="3"
-                  lg="4"
-                  md="6"
-                  sm="6"
-                  xs="12"
-                >
-                  <v-card
-                    class="pa-0"
-                    elevation="0"
-                    color="#52BE80"
-                    dark
-                  >
-                    <v-card-text>
-                      <div class="text-h4 white--text">50</div>
-                      <div class="white--text text-headline font-weight-bold">จำนวนรายการอาหาร(Recipes)</div>
-                    </v-card-text>
-                  </v-card>
-
-                </v-col>
-
-                <!--start-->
-                <v-col
-                  cols="12"
-                  xl="3"
-                  lg="4"
-                  md="6"
-                  sm="6"
-                  xs="12"
-                >
-                  <v-card
-                    class="pa-0"
-                    elevation="0"
-                    color="#52BE80"
-                    dark
-                  >
-                    <v-card-text>
-                      <div class="text-h4 white--text">50</div>
-                      <div class="white--text text-headline font-weight-bold">จำนวนเซ็ทสินค้า(Combo Deal)</div>
-                    </v-card-text>
-                  </v-card>
-
-                </v-col>
-
-              </v-row>
-
-            </v-form>
-
-            <v-col
-              cols="12"
-              sm="12"
-              class="mt-10"
+          <!--START COL -->
+          <v-col
+            cols="12"
+            sm="6"
+          >
+            <v-card
+              color="primary"
+              dark
+              max-width="700"
             >
-              <!-- link -->
+              <div class="d-flex flex-no-wrap justify-space-between">
+                <div>
+                  <v-card-title class="text-h6">
+                    Android Box
+                  </v-card-title>
 
-              <v-card outlined>
-                <v-card-title class="text-h6">
-                  ดูรายงานเพิ่มเติม
-                </v-card-title>
-                <v-card-text>
-                  <v-row
-                    align="center"
-                    justify-center
-                  >
-                    <!--start-->
-                    <v-col
-                      cols="12"
-                      xl="3"
-                      lg="4"
-                      md="6"
-                      sm="6"
-                      xs="12"
+                  <v-card-subtitle>
+                    ควบคุมและจัดการ Android Box
+                  </v-card-subtitle>
+                  <v-card-actions>
+                    <v-btn
+                      class="ml-2 mt-5"
+                      outlined
+                      rounded
+                      small
+                      to="/branch/ListBranch"
                     >
-                      <v-btn
-                        block
-                        color="primary"
-                        depressed
-                        elevation="2"
-                        class="white--text text-headline font-weight-bold"
-                        large
-                      >สมัครสมาชิก</v-btn>
+                      จัดการ
+                    </v-btn>
+                  </v-card-actions>
+                </div>
 
-                    </v-col>
+                <v-avatar
+                  class="ma-3"
+                  size="125"
+                  tile
+                >
+                  <v-img src="https://firebasestorage.googleapis.com/v0/b/goldprice-ceb94.appspot.com/o/imgs%2Fandroid-logo.jpeg?alt=media&token=1f571aa0-5886-4a98-9744-c6b7c74b5897"></v-img>
+                </v-avatar>
+              </div>
+            </v-card>
+          </v-col>
 
-                    <!--start-->
-                    <v-col
-                      cols="12"
-                      xl="3"
-                      lg="4"
-                      md="6"
-                      sm="6"
-                      xs="12"
+          <!--END COL -->
+
+
+
+          <!--START COL -->
+          <v-col
+            cols="12"
+            sm="6"
+          >
+            <v-card
+              color="primary"
+              dark
+              max-width="700"
+            >
+              <div class="d-flex flex-no-wrap justify-space-between">
+                <div>
+                  <v-card-title class="text-h6">
+                    จัดการผู้ใช้งาน
+                  </v-card-title>
+
+                  <v-card-subtitle>
+                    เพิ่มหรือจัดการผู้ใช้งานระบบ
+                  </v-card-subtitle>
+                  <v-card-actions>
+                    <v-btn
+                      class="ml-2 mt-5"
+                      outlined
+                      rounded
+                      small
+                      to="/user/ListUsers"
                     >
-                      <v-btn
-                        block
-                        color="primary"
-                        depressed
-                        elevation="2"
-                        class="white--text text-headline font-weight-bold"
-                        large
-                      >วันหมดอายุสินค้า</v-btn>
+                      จัดการ
+                    </v-btn>
+                  </v-card-actions>
+                </div>
 
-                    </v-col>
+                <v-avatar
+                  class="ma-3"
+                  size="125"
+                  tile
+                >
+                  <v-img src="https://www.prachachat.net/wp-content/uploads/2021/03/GoldA1200x800-728x485.jpg"></v-img>
+                </v-avatar>
+              </div>
+            </v-card>
+          </v-col>
 
-                    <!--start-->
-                    <v-col
-                      cols="12"
-                      xl="3"
-                      lg="4"
-                      md="6"
-                      sm="6"
-                      xs="12"
+          <!--END COL -->
+
+
+          <!--START COL -->
+          <v-col
+            cols="12"
+            sm="6"
+          >
+            <v-card
+              color="primary"
+              dark
+              max-width="700"
+            >
+              <div class="d-flex flex-no-wrap justify-space-between">
+                <div>
+                  <v-card-title class="text-h6">
+                    ตั้งค่าระบบ
+                  </v-card-title>
+
+                  <v-card-subtitle >
+                    ตั้งค่าระบบ
+                  </v-card-subtitle>
+                  <v-card-actions>
+                    <v-btn
+                      class="ml-2 mt-5"
+                      outlined
+                      rounded
+                      small
+                      to="/setting/setting"
                     >
-                      <v-btn
-                        block
-                        color="primary"
-                        depressed
-                        elevation="2"
-                        class="white--text text-headline font-weight-bold"
-                        large
-                      >แจ้งเตือนจำนวนสต็อค</v-btn>
+                      จัดการ
+                    </v-btn>
+                  </v-card-actions>
+                </div>
 
-                    </v-col>
-                    <!--start-->
-                    <v-col
-                      cols="12"
-                      xl="3"
-                      lg="4"
-                      md="6"
-                      sm="6"
-                      xs="12"
-                    >
-                      <v-btn
-                        block
-                        color="primary"
-                        depressed
-                        elevation="2"
-                        class="white--text text-headline font-weight-bold"
-                        large
-                      >รายงานสินค้า</v-btn>
+                <v-avatar
+                  class="ma-3"
+                  size="125"
+                  tile
+                >
+                  <v-img src="https://www.prachachat.net/wp-content/uploads/2021/03/GoldA1200x800-728x485.jpg"></v-img>
+                </v-avatar>
+              </div>
+            </v-card>
+          </v-col>
 
-                    </v-col>
+          <!--END COL -->
+        </v-row>
 
-
-                           <!--start-->
-                    <v-col
-                      cols="12"
-                      xl="3"
-                      lg="4"
-                      md="6"
-                      sm="6"
-                      xs="12"
-                    >
-                      <v-btn
-                        block
-                        color="primary"
-                        depressed
-                        elevation="2"
-                        class="white--text text-headline font-weight-bold"
-                        large
-                      >สินค้าขายดี</v-btn>
-
-                    </v-col>
-
-                    <!--start-->
-                    <v-col
-                      cols="12"
-                      xl="3"
-                      lg="4"
-                      md="6"
-                      sm="6"
-                      xs="12"
-                    >
-                      <v-btn
-                        block
-                        color="primary"
-                        depressed
-                        elevation="2"
-                        class="white--text text-headline font-weight-bold"
-                        large
-                      >รายงานการขาย</v-btn>
-
-                    </v-col>
-
-                    <!--start-->
-                    <v-col
-                      cols="12"
-                      xl="3"
-                      lg="4"
-                      md="6"
-                      sm="6"
-                      xs="12"
-                    >
-                      <v-btn
-                        block
-                        color="primary"
-                        depressed
-                        elevation="2"
-                        class="white--text text-headline font-weight-bold"
-                        large
-                      >รายงานการซื้อ</v-btn>
-
-                    </v-col>
-                    <!--start-->
-                    <v-col
-                      cols="12"
-                      xl="3"
-                      lg="4"
-                      md="6"
-                      sm="6"
-                      xs="12"
-                    >
-                      <v-btn
-                        block
-                        color="primary"
-                        depressed
-                        elevation="2"
-                        class="white--text text-headline font-weight-bold"
-                        large
-                      >รายงานการชำระเงิน</v-btn>
-
-                    </v-col>
-
-                           <!--start-->
-                    <v-col
-                      cols="12"
-                      xl="3"
-                      lg="4"
-                      md="6"
-                      sm="6"
-                      xs="12"
-                    >
-                      <v-btn
-                        block
-                        color="primary"
-                        depressed
-                        elevation="2"
-                        class="white--text text-headline font-weight-bold"
-                        large
-                      >รายงานรายจ่าย</v-btn>
-
-                    </v-col>
-                           <!--start-->
-                    <v-col
-                      cols="12"
-                      xl="3"
-                      lg="4"
-                      md="6"
-                      sm="6"
-                      xs="12"
-                    >
-                      <v-btn
-                        block
-                        color="primary"
-                        depressed
-                        elevation="2"
-                        class="white--text text-headline font-weight-bold"
-                        large
-                      >รายงานรายรับ</v-btn>
-
-                    </v-col>
-
-                           <!--start-->
-                    <v-col
-                      cols="12"
-                      xl="3"
-                      lg="4"
-                      md="6"
-                      sm="6"
-                      xs="12"
-                    >
-                      <v-btn
-                        block
-                        color="primary"
-                        depressed
-                        elevation="2"
-                        class="white--text text-headline font-weight-bold"
-                        large
-                      >รายงานภาษี</v-btn>
-
-                    </v-col>
-
-                           <!--start-->
-                    <v-col
-                      cols="12"
-                      xl="3"
-                      lg="4"
-                      md="6"
-                      sm="6"
-                      xs="12"
-                    >
-                      <v-btn
-                        block
-                        color="primary"
-                        depressed
-                        elevation="2"
-                        class="white--text text-headline font-weight-bold"
-                        large
-                      >รายงานโอนย้ายสต็อค</v-btn>
-
-                    </v-col>
-
-                           <!--start-->
-                    <v-col
-                      cols="12"
-                      xl="3"
-                      lg="4"
-                      md="6"
-                      sm="6"
-                      xs="12"
-                    >
-                      <v-btn
-                        block
-                        color="primary"
-                        depressed
-                        elevation="2"
-                        class="white--text text-headline font-weight-bold"
-                        large
-                      >รายงานการปรับสต็อค</v-btn>
-
-                    </v-col>
-
-                           <!--start-->
-                    <v-col
-                      cols="12"
-                      xl="3"
-                      lg="4"
-                      md="6"
-                      sm="6"
-                      xs="12"
-                    >
-                      <v-btn
-                        block
-                        color="primary"
-                        depressed
-                        elevation="2"
-                        class="white--text text-headline font-weight-bold"
-                        large
-                      >รายงานตามเวลา</v-btn>
-
-                    </v-col>
-
-                           <!--start-->
-                    <v-col
-                      cols="12"
-                      xl="3"
-                      lg="4"
-                      md="6"
-                      sm="6"
-                      xs="12"
-                    >
-                      <v-btn
-                        block
-                        color="primary"
-                        depressed
-                        elevation="2"
-                        class="white--text text-headline font-weight-bold"
-                        large
-                      >รายงานกิจกรรมในแอพ</v-btn>
-
-                    </v-col>
-                  </v-row>
-                </v-card-text>
-
-              </v-card>
-
-            </v-col>
-          </v-card-text>
-        </v-card>
       </v-col>
-
     </v-row>
   </v-container>
 </template>
 
 <script>
 export default {
-  middleware: 'authenticated',
+  middleware: "authenticated",
   data: () => ({
     sheet: false,
     valid: true,
@@ -748,7 +226,7 @@ export default {
       v => /.+@.+\..+/.test(v) || "E-mail must be valid"
     ],
     select: null,
-    checkbox: false, 
+    checkbox: false
   }),
   methods: {
     validate() {
@@ -764,6 +242,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
 </style>
 

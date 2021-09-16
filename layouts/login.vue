@@ -2,7 +2,7 @@
 <template>
  <v-app >
   <div class="Mainlogin">
-    <router-view></router-view>
+     <Nuxt />
   </div>
  </v-app>
 </template>

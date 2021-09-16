@@ -5,6 +5,13 @@ export default {
   this.Name =  nuxtStorage.localStorage.getData('isname');
   this.LastName = nuxtStorage.localStorage.getData('islastname');
   this.Email = nuxtStorage.localStorage.getData('ismail');
+  var Str = nuxtStorage.localStorage.getData('isname')
+  //console.log(Str);
+  },
+  mounted () {
+    var Str = nuxtStorage.localStorage.getData('isname')
+    ////console.log(Str[0])
+    this.IconName = Str[0]
   },
   methods: {
     Logout() {
@@ -21,6 +28,7 @@ export default {
   },
   data () {
     return {
+      IconName: '',
       fav: true,
       menu: false,
       message: false,
@@ -38,19 +46,25 @@ export default {
           title: 'หน้าแรก',
           to: '/'
         },
+        {
+          icon: 'mdi-gold',
+          title: 'ราคาทอง',
+          to: '/price/ListPrice'
+        }, 
          {
           icon: 'mdi-gold',
           title: 'เพิ่มราคาทอง',
           to: '/price/addprice'
         }, 
+      
         {
-          icon: 'mdi-bank-plus',
-          title: 'จัดการสาขา',
+          icon: 'mdi-android',
+          title: 'จัดการ Android Box',
           to: '/branch/ListBranch'
         }, 
          {
-          icon: 'mdi-source-branch',
-          title: 'เพิ่มสาขา',
+          icon: 'mdi-android',
+          title: 'เพิ่ม Android Box',
           to: '/branch/AddBranch'
         }, 
          {

@@ -6,6 +6,30 @@ $font-size-root: 16px;
 $body-font-family: 'SukhumvitSet-Text';
 $heading-font-family: 'SukhumvitSet-Bold';
 
+.Hedaer-Gold{
+  font-family: 'Goldfont';
+}
+$material-light: (
+  'background': rgb(247, 247, 247)
+);
+
+.style-1 {
+  background-color: rgb(230, 230, 229)
+}
+.style-2 {
+  background-color: rgb(255, 255, 255)
+}
+
+.Table-myheader{
+  background-color: aqua;
+}
+
+@font-face {
+  font-family: "Goldfont";
+  src: local("SukhumvitSet-Medium"),
+   url(~assets/fonts/GoldFont.ttf) format("truetype");
+ }
+ 
 @font-face {
  font-family: "SukhumvitSet-Medium";
  src: local("SukhumvitSet-Medium"),

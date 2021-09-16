@@ -1,8 +1,13 @@
+
+import nuxtStorage from 'nuxt-storage';
+
 export default {
   data: () => ({
     Loading: false,
     dialog: false,
     dialogDelete: false,
+
+    Maintempalte : '',
 
     //form 
     statusselect :[
@@ -17,12 +22,12 @@ export default {
 
     ],
     headers: [
-      { text: "ชื่อ", value: "Name" },
-      { text: "นามสกุล", value: "Lastname" },
-      { text: "อีเมลล์", value: "Email" },
-      { text: "สถานะ", value: "StatusUser", align: "center" },
-      { text: "ระดับผู้ใช้", value: "TypeUserSelct", align: "center" },
-
+      { text: "โลโก้", value: "LogoBranch" },
+      { text: "ชื่ออุปกรณ์", value: "Name" },
+      { text: "ข้อความโฆษณา", value: "AdsText" },
+      { text: "Serial", value: "PrivateKey" , align: "center"},
+      { text: "เข้าใช้งาน", value: "IsUseProduct",align: "center"},
+      { text: "สถานะอุปกรณ์", value: "StatusBranch", align: "center" },
       { text: "จัดการ", value: "actions", sortable: false }
     ],
     desserts: [],
@@ -55,12 +60,33 @@ export default {
   created() {
     this.initialize();
   },
-
+mounted () {
+   this.loadSeting()
+},
   methods: {
+    async loadSeting(){
+
+      try {
+        await this.$fire.firestore
+          .collection("SETTING")
+          .get()
+          .then(snap => {
+            var dd = snap.docs.map(function(doc) {
+              var db = doc.data();
+              db.id = doc.id;
+              return db;
+            });
+            this.Maintempalte = dd[0].maintemplate
+          });
+      } catch (error) {
+        // console.log(error)
+      }
+           
+          },
     async initialize() {
       try {
         await this.$fire.firestore
-          .collection("USER")
+          .collection("BRANCH")
           .get()
           .then(snap => {
             var dd = snap.docs.map(function(doc) {
@@ -76,15 +102,27 @@ export default {
       }
     },
 
+    Copydata(item){
+      console.log(item.PrivateKey);
+      navigator.clipboard.writeText(item.PrivateKey)
+      this.SucceceWork('Copy Serial Clipboard')
+    }, 
+
+    GetIsUseProduct(status) {
+      if (status) return 'green'
+      else return 'red'
+    },
+
     getColor (status) {
       if (status) return 'green'
       else return 'red'
     },
 
     editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
-      this.editedItem = Object.assign({}, item);
-      this.dialog = true;
+      this.$router.push(`result/${item.PrivateKey}`)
+      // this.editedIndex = this.desserts.indexOf(item);
+      // this.editedItem = Object.assign({}, item);
+      // this.dialog = true;
     },
 
     deleteItem(item) {
@@ -94,12 +132,18 @@ export default {
     },
 
     async deleteItemConfirm() {
+
+   
+      
       if (this.desserts.length < 2) {
         this.ErrorWork("ลบไม่ได้ จะต้องมีข้อมูลอย่างน้อบ 1 ตาราง");
       } else {
+        if (this.desserts[this.editedIndex].PrivateKey === this.Maintempalte) {
+          this.ErrorWork("ไม่สามารถลบสาขาหลักได้");
+        }else{
         try {
           await this.$fire.firestore
-            .collection("USER")
+            .collection("BRANCH")
             .doc(this.desserts[this.editedIndex].id)
             .delete();
           await this.desserts.splice(this.editedIndex, 1);
@@ -110,6 +154,7 @@ export default {
           this.ErrorWork("เกิดปัญหาการลบ : " + error);
         }
       }
+    }
 
       this.closeDelete();
     },
@@ -134,7 +179,7 @@ export default {
       if (this.editedIndex > -1) {
               
          try {
-          await this.$fire.firestore.collection("USER")
+          await this.$fire.firestore.collection("BRANCH")
                  .doc(this.desserts[this.editedIndex].id)
                  .update(
                   this.editedItem

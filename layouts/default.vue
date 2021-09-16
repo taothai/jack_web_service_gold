@@ -19,7 +19,7 @@
             </div>
 
             <v-list-item-title class="title text-center">
-              <span class="font-weight-bold text-center">ราคาทองวันนี้</span>
+              <span class="font-weight-bold text-center Hedaer-Gold">ราคาทองวันนี้</span>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">ระบบจัดการแอพพลิเคชันทองคำ</v-list-item-subtitle>
           </v-list-item-content>
@@ -94,7 +94,7 @@
                   color="red accent-4"
                   size="36"
                 >
-                  <span class="white--text text-h5">T</span>
+                  <span class="white--text text-h5">{{IconName}}</span>
                 </v-avatar>
               </v-badge>
             </v-btn>
@@ -108,7 +108,7 @@
                   size="36"
                   class="mr-5"
                 >
-                  <span class="white--text text-h5">T</span>
+                  <span class="white--text text-h5">{{IconName}}</span>
                 </v-avatar>
 
                 <v-list-item-content>
@@ -142,7 +142,7 @@
       <!--  END USER ZONE -->
     </v-app-bar>
     <v-main>
-      <v-container>
+      <v-container fluid>
         <Nuxt />
       </v-container>
     </v-main>
@@ -166,6 +166,7 @@
     <v-footer
       fixed
       app
+      class="text-caption"
     >
       <span>&copy;ราคาทองวันนี้ Develop by TEEKHA {{ new Date().getFullYear() }}</span>
     </v-footer>
@@ -174,3 +175,6 @@
 
 <script src="./MyPrivate.js">
 </script>
+<style lang="scss" scoped>
+
+</style>

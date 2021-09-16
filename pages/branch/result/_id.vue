@@ -1,12 +1,9 @@
 <template>
-  <v-container
-    class="ml-2 pa-0 mt-5 mb-5"
-    fluid
-  >
+  <v-container class="ml-2 pa-0 mt-5 mb-5" fluid>
     <v-row
       align="center"
       justify-center
-      class="pa-0 mr-2"
+       class="pa-0 mr-2"
     >
       <v-col
         col="12"
@@ -14,7 +11,7 @@
         sm="12"
         md="12"
         lg="12"
-        class="pa-0"
+         class="pa-0"
       >
 
         <v-card
@@ -24,28 +21,18 @@
         >
           <v-card-title>
             <div class="text-subtitle-1">
-              # เพิ่มอุปกรณ์ Android Box
+              # แก้ไขรายการ
             </div>
 
             <v-spacer></v-spacer>
-            <div>
-              <v-btn
-                color="green"
-                elevation="0"
-                outlined
-                small
-                @click="LoadSetting()"
-                class="mr-3"
-              >นำ template มาใช้</v-btn>
 
-              <v-btn
-                color="primary"
-                elevation="0"
-                outlined
-                small
-                to="/branch/ListBranch"
-              >#อุปกรณ์ทั้งหมด</v-btn>
-            </div>
+            <v-btn
+              color="primary"
+              elevation="0"
+              outlined
+              small
+              to="/branch/ListBranch"
+            >#อุปกรณ์ทั้งหมด</v-btn>
 
           </v-card-title>
           <v-divider></v-divider>
@@ -159,9 +146,7 @@
                             outlined
                             v-model="filename1"
                             counter
-                            required
                             dense
-                            :rules="[v => !!v || 'ต้องระบุ']"
                             append-icon="mdi-play-circle-outline"
                             hide-details
                             @change="SelcectVDOAds"
@@ -231,10 +216,10 @@
                             label="รูปภาพแสดงโฆษณา"
                             outlined
                             counter
-                            required
+
                             v-model="filename2"
                             dense
-                            :rules="[v => !!v || 'ต้องระบุ']"
+                          
                             append-icon="mdi-camera"
                             hide-details
                             @change="SelcectImageAds"
@@ -304,10 +289,9 @@
                             label="โลโก้ประจำอุปกรณ์"
                             outlined
                             counter
-                            required
                             v-model="filename3"
                             dense
-                            :rules="[v => !!v || 'ต้องระบุ']"
+                          
                             append-icon="mdi-camera"
                             hide-details
                             @change="SelcectLogo"
@@ -352,20 +336,21 @@
 
                 <!--End -->
 
+        
                 <v-col
                   cols="12"
                   sm="12"
                 >
                   <v-switch
                     class="ml-5"
-                    v-model="StatusBranch "
+                    v-model="StatusBranch"
                     inset
                     label="เปิดใช้งานอุปกรณ์"
                   ></v-switch>
 
                 </v-col>
 
-                <v-col
+                 <v-col
                   cols="12"
                   sm="12"
                 >
@@ -386,10 +371,11 @@
                     class="ml-5"
                     v-model="MainTemplate"
                     inset
-                    label="ใช้เป็น template หลัก"
+                    label="ใช้เป็น tamplate หลัก"
                   ></v-switch>
 
                 </v-col>
+
 
                 <v-col
                   cols="12"
@@ -449,7 +435,7 @@
   </v-container>
 </template>
 
-<script src="./MyAddBranch.js">
+<script src="./result.js">
 </script>
 <style lang="scss" scoped>
 // import zone

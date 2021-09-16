@@ -9,7 +9,7 @@
     <v-card
       elevation="10"
       max-width="400"
-      min-width="400"
+      min-width="350"
     >
       <v-card-title
         primary-title

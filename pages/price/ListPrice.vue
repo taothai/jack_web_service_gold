@@ -16,11 +16,11 @@
         <v-card
           class="ml-2"
           elevation="6"
-          max-width="1000"
+          max-width="1200"
         >
           <v-card-title>
-            <div class="text-subtitle-1">
-              # รายชื่อผู้ใช้งาน
+            <div class="title red--text">
+              # ราคาทองวันนี้ {{NoWTime}}
             </div>
 
             <v-spacer></v-spacer>
@@ -30,8 +30,8 @@
               elevation="0"
               outlined
               small
-              to="/user/adduser"
-            >เพิ่มผู้ใช้งาน</v-btn>
+              to="/price/AddPrice"
+            >เพิ่มราคาทอง</v-btn>
 
           </v-card-title>
           <v-divider></v-divider>
@@ -86,14 +86,35 @@
                               label="อีเมลล์"
                             ></v-text-field>
                           </v-col>
-                     
-
-                           <v-col
+                          <v-col
                             cols="12"
                             sm="6"
                             md="4"
                           >
-                             <v-select
+                            <v-text-field
+                              disabled
+                              v-model="editedItem.Branch"
+                              label="สาขา"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              v-model="editedItem.CountExprireDate"
+                              label="วันใช้งาน"
+                              type="number"
+                            ></v-text-field>
+                          </v-col>
+
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-select
                               :items="statusselect"
                               v-model="editedItem.StatusUser"
                               item-text="name"
@@ -101,10 +122,6 @@
                             ></v-select>
                           </v-col>
 
-
-
-
-                          
                         </v-row>
                       </v-container>
                     </v-card-text>
@@ -133,7 +150,7 @@
                   max-width="500px"
                 >
                   <v-card>
-                    <v-card-title class="text-h5">ยืนยันการ?</v-card-title>
+                    <v-card-title class="text-h5">ยืนยันการลบ?</v-card-title>
                     <v-card-actions>
                       <v-spacer></v-spacer>
                       <v-btn
@@ -176,35 +193,47 @@
                 <v-data-table
                   :headers="headers"
                   :items="desserts"
-                  sort-by="calories"
-                  class="elevation-1"
+                  class="elevation-3 Table-myheader"
+                  :item-class="itemRowBackground"
                 >
 
-                  <template v-slot:item.listnumber="{ item }">
-                    <div>{{item.index}}</div>
-                  </template>
-                    <template v-slot:item.StatusUser="{ item }">
+                  <template v-slot:item.StatusUser="{ item }">
 
-                      <v-badge
-                        :color="getColor(item.StatusUser)"
-                        inline
-                        dot
-                      ></v-badge>
-                      </template>
-                  <template v-slot:item.actions="{ item }">
+                    <v-badge
+                      :color="getColor(item.StatusUser)"
+                      inline
+                      dot
+                    ></v-badge>
+                  </template>
+
+                  <template v-slot:item.chang="{ item }">
+                        <v-btn
+                            :color="getColor(item.chang)"
+                            class="ma-2 white--text font-weight-bold"
+                            text
+                          >
+                              {{item.chang}}
+                             <img
+                            :src="getStatus(item.chang)"
+                            width="15"
+                            class="ml-1"
+                             />
+                          </v-btn>
+               
+                  </template>
+                  <template v-slot:item.actions="{ item }" >
+
+                    <div v-if="!item.IsBot">
+    
                     <v-icon
                       small
-                      class="mr-2"
-                      @click="editItem(item)"
-                    >
-                      mdi-pencil
-                    </v-icon>
-                    <v-icon
-                      small
+                      color="primary"
                       @click="deleteItem(item)"
                     >
                       mdi-delete
                     </v-icon>
+                    </div>
+                   
                   </template>
 
                   <template v-slot:no-data>
@@ -230,7 +259,10 @@
   </v-container>
 </template>
 
-<script src="./MyListUser.js">
+<script src="./MyListPrice.js">
 </script >
 <style lang="scss" scoped>
+
+
+
 </style>
